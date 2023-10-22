@@ -1,11 +1,12 @@
-﻿using UniRx;
+﻿using Examples.Shared;
+using UniRx;
 using UnityEngine;
 
 namespace Examples.ReactivePropertyAndSubject
 {
     public class ReactivePropertyListener : MonoBehaviour
     {
-        [SerializeField] private ReactivePropertyProvider propertyProvider;
+        [SerializeField] private IntReactivePropertyProvider propertyProvider;
 
         private readonly CompositeDisposable _disposable = new();
 

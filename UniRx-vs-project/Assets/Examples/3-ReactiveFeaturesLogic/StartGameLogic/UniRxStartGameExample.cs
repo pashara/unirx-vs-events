@@ -2,21 +2,16 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Examples.EventsVsUnRx;
-using Examples.ReactivePropertyAndSubject;
+using Examples.Shared;
 using Examples.Shared.ReactiveCollections;
 using UniRx;
 using UnityEngine;
 
 namespace Examples.ReactiveFeaturesLogic
 {
-    /// Business logic: Game starts when:
-    /// 1) players count > 1
-    /// 2) game loader progress == 100
-    /// 3) player inside state `stateToTrigger`
-    
-    public class UniRxOperatorsHandler_StartGame : MonoBehaviour
+    public class UniRxStartGameExample : MonoBehaviour
     {
-        [SerializeField] private ReactivePropertyProvider loadingHandler;
+        [SerializeField] private IntReactivePropertyProvider loadingHandler;
         [SerializeField] private SubjectSendHandler stateHandler;
         [SerializeField] private IntReactiveCollectionProvider joinedPlayers;
         
@@ -37,9 +32,15 @@ namespace Examples.ReactiveFeaturesLogic
 
         private bool IsAllowedToStartGame((int userLoadingPercents, string state, int playersCount) d)
         {
-            return d.userLoadingPercents == 100 &&
-                   d.state.Equals(stateToTrigger) &&
-                   d.playersCount > 0;
+            var result = d.userLoadingPercents == 100 &&
+                         d.state.Equals(stateToTrigger) &&
+                         d.playersCount > 0;
+            
+            Debug.Log($"==Check game state:==\n " +
+                      $"userLoadingPercents: {d.userLoadingPercents}\n" +
+                      $"state: {d.state}\n" +
+                      $"playersCount: {d.playersCount}");
+            return result;
         }
 
         private async void HandleBusinessLogic(CancellationToken ct)
@@ -58,7 +59,7 @@ namespace Examples.ReactiveFeaturesLogic
                     .Take(1)
                     .Subscribe(x => { isAllowed = x; }).AddTo(allInsideDisposables);
 
-                await UniTask.WaitUntil(() => !isAllowed, cancellationToken: ct);
+                await UniTask.WaitWhile(() => !isAllowed, cancellationToken: ct);
 
                 Debug.Log("Load game scene!");
                 disposable.Dispose();

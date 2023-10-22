@@ -1,4 +1,5 @@
 using Examples.EventsVsUnRx;
+using Examples.Shared;
 using UniRx;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Examples.ReactivePropertyAndSubject
 {
     public class ReactivePropertyAndSubjectSubscribe : MonoBehaviour
     {
-        [SerializeField] private ReactivePropertyProvider propertyProvider;
+        [SerializeField] private IntReactivePropertyProvider propertyProvider;
         [SerializeField] private SubjectSendHandler subjectSendHandler;
 
         private readonly CompositeDisposable _disposable = new();

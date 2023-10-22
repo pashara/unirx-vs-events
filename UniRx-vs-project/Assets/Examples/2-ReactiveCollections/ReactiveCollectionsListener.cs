@@ -3,7 +3,7 @@ using Examples.Shared.ReactiveCollections;
 using UniRx;
 using UnityEngine;
 
-namespace Examples._2_ReactiveCollections
+namespace Examples.ReactiveCollections
 {
     public class ReactiveCollectionsListener : MonoBehaviour
     {
@@ -13,6 +13,11 @@ namespace Examples._2_ReactiveCollections
         
         private void Awake()
         {
+            foreach (var collectionItem in collectionProvider1.SimpleCollection)
+            {
+                Debug.Log($"Element inside collection #1: {collectionItem}");
+            }
+            
             collectionProvider1.ReadOnlyCollection.ObserveAdd().Subscribe(OnAddValue).AddTo(this);
             collectionProvider2.ReadOnlyCollection.ObserveAdd().Subscribe(OnAddValue).AddTo(this);
             collectionProvider3.ReadOnlyCollection.ObserveAdd().Subscribe(OnAddValue).AddTo(this);
@@ -24,7 +29,7 @@ namespace Examples._2_ReactiveCollections
                 .AddTo(this);
 
             collectionProvider1.ReadOnlyCollection
-                .ObserveCountChanged()
+                .ObserveCountChanged(false)
                 .Subscribe(x => Debug.Log($"On every collection size change: size is {x}"))
                 .AddTo(this);
 
