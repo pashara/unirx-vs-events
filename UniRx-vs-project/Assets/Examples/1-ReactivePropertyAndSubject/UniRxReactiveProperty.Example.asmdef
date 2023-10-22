@@ -2,7 +2,9 @@
     "name": "UniRxReactiveProperty.Example",
     "rootNamespace": "",
     "references": [
-        "UniRx"
+        "UniRx",
+        "EasyButtons",
+        "UniRxExamples.Shared"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

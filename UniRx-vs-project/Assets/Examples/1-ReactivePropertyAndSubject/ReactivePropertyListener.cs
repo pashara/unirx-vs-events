@@ -18,15 +18,15 @@ namespace Examples.ReactivePropertyAndSubject
             propertyProvider.PropertyRead
                 .Subscribe(x =>
                 {
-                    Debug.Log($"Property on subscribe and change: {x}");
+                    Debug.Log($"[UniRx] Property on subscribe and change: {x}");
                 }).AddTo(_disposable);
 
             // Listen property on every change action
             propertyProvider.PropertyRead
-                .SkipLatestValueOnSubscribe()
+                .SkipLatestValueOnSubscribe() // Shugar for .Skip(1) + hasValue check
                 .Subscribe(x =>
                 {
-                    Debug.Log($"Property value changed to {x}");
+                    Debug.Log($"[UniRx] Property value changed to {x}");
                 })
                 .AddTo(_disposable);
 
@@ -36,7 +36,7 @@ namespace Examples.ReactivePropertyAndSubject
                 .Pairwise()
                 .Subscribe(x =>
                 {
-                    Debug.Log($"Property value changed from {x.Previous} to {x.Current}. Diff: {x.Current - x.Previous}");
+                    Debug.Log($"[UniRx] Property value changed from {x.Previous} to {x.Current}. Diff: {x.Current - x.Previous}");
                 })
                 .AddTo(_disposable);
         }

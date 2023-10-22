@@ -1,9 +1,10 @@
 {
-    "name": "UniRxExamples.Shared",
+    "name": "UniRxVsEvent.Example",
     "rootNamespace": "",
     "references": [
         "EasyButtons",
-        "UniRx"
+        "UniRx",
+        "UniRxExamples.Shared"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

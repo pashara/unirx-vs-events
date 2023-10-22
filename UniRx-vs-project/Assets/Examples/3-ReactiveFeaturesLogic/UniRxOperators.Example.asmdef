@@ -1,0 +1,4 @@
+﻿{
+  "name": "UniRxOperators.Example",
+  "references":[ "UniRxExamples.Shared", "UniRx", "UniTask", "EasyButtons" ]
+}

@@ -1,9 +1,10 @@
 {
-    "name": "UniRxExamples.Shared",
+    "name": "UniRxReactiveCollections.Example",
     "rootNamespace": "",
     "references": [
+        "UniRx",
         "EasyButtons",
-        "UniRx"
+        "UniRxExamples.Shared"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
